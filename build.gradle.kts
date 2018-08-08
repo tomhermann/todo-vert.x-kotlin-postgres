@@ -1,5 +1,6 @@
 import org.gradle.jvm.tasks.Jar
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion = "1.2.60"
 val vertxVersion = "3.5.3"
@@ -23,6 +24,7 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     implementation("io.vertx:vertx-core:$vertxVersion")
+    implementation("io.vertx:vertx-web:$vertxVersion")
     implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
     implementation("io.vertx:vertx-mysql-postgresql-client:$vertxVersion")
 }
@@ -33,6 +35,12 @@ application {
 }
 
 tasks{
+    "compileKotlin"(KotlinCompile::class) {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
     withType<ShadowJar> {
         classifier = "fat"
         mergeServiceFiles {
@@ -51,4 +59,9 @@ tasks{
     withType<JavaExec> {
         args("run", mainVerticalName, "--launcher-class=${application.mainClassName}")
     }
+
+    "stage" {
+        dependsOn("shadowJar")
+    }
 }
+
