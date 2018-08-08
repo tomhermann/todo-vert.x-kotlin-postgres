@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion = "1.2.60"
 val vertxVersion = "3.5.3"
+val jacksonVersion = "2.9.6"
 val mainVerticalName = "com.fueledbysoda.todo.MainVerticle"
 
 group = "com.fueledbysoda.todo"
@@ -27,6 +28,7 @@ dependencies {
     implementation("io.vertx:vertx-web:$vertxVersion")
     implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
     implementation("io.vertx:vertx-mysql-postgresql-client:$vertxVersion")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 }
 
 application {
