@@ -3,6 +3,14 @@ package com.fueledbysoda.todo
 import java.util.*
 import kotlin.collections.ArrayList
 
+data class TodoItem(
+        val id: UUID = UUID.randomUUID(),
+        var title: String,
+        var completed: Boolean = false,
+        val url: String = "${rootUrl()}/$id",
+        var order: Int = -1
+)
+
 class TodoService {
     private val items = arrayListOf<TodoItem>()
 
@@ -41,12 +49,4 @@ class TodoService {
         }
     }
 }
-
-data class TodoItem(
-        val id: UUID = UUID.randomUUID(),
-        var title: String,
-        var completed: Boolean = false,
-        val url: String = "${rootUrl()}/$id",
-        var order: Int = -1
-)
 
