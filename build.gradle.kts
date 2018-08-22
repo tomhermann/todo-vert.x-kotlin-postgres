@@ -29,6 +29,20 @@ dependencies {
     implementation("io.vertx:vertx-lang-kotlin:$vertxVersion")
     implementation("io.vertx:vertx-mysql-postgresql-client:$vertxVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+
+    testCompile("io.kotlintest:kotlintest-runner-junit5:3.1.9")
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.2.0")
+    testCompile("org.hamcrest:hamcrest-library:1.3")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 application {
